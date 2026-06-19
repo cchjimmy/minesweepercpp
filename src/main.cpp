@@ -1,6 +1,6 @@
-#include "app.hpp"
+#include "game.hpp"
 
 int main() {
-  App app(60, 60);
+  Game app;
   app.run();
 }

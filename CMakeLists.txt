@@ -17,5 +17,5 @@ project(minesweeper)
 
 add_executable(${PROJECT_NAME})
 target_sources(${PROJECT_NAME} PRIVATE ${SRC})
-target_link_libraries(${PROJECT_NAME} PRIVATE ncurses)
+target_link_libraries(${PROJECT_NAME} PRIVATE ncurses form)
 target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra)
