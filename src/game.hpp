@@ -62,7 +62,7 @@ void buildStatusString(MineSweeper &ms, std::string &str) {
   str.clear();
   str.append(
       "Keys: r - new game, c - configure,\n      f - flag cell, space - reveal "
-      "cell\n");
+      "cell\n      q - quit\n");
   str.append("Movement: w/a/s/d, h/j/k/l, arrow keys\n");
   str.append("Seed: ");
   str.append(std::to_string(ms.getSeed()));
@@ -103,11 +103,11 @@ public:
     keypad(stdscr, TRUE);
     start_color();
     init_color(COLOR_DARK_GREEN, (124 * 1000 / 256), (252 * 1000 / 256), 0);
-    init_pair(GREEN_PAIR, COLOR_WHITE, COLOR_GREEN);
+    init_pair(GREEN_PAIR, COLOR_BLACK, COLOR_GREEN);
     init_pair(BOMB_PAIR, COLOR_RED, COLOR_RED);
     init_pair(DEFAULT_PAIR, COLOR_WHITE, COLOR_BLACK);
     init_pair(BLACK_PAIR, COLOR_BLACK, COLOR_BLACK);
-    init_pair(DARK_GREEN_PAIR, COLOR_WHITE, COLOR_DARK_GREEN);
+    init_pair(DARK_GREEN_PAIR, COLOR_BLACK, COLOR_DARK_GREEN);
     init_pair(CURSOR_PAIR, COLOR_BLACK, COLOR_WHITE);
   }
   ~Game() { endwin(); }
@@ -320,12 +320,14 @@ public:
         break;
       case ' ': {
         state = ms.progress(cursor);
+        buildStatusString(ms, status);
         break;
       }
       case 'f':
         ms.setFlagMode(true);
         state = ms.progress(cursor);
         ms.setFlagMode(false);
+        buildStatusString(ms, status);
         break;
       }
     }
