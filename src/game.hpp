@@ -212,6 +212,7 @@ public:
   }
 
   void run() {
+    int winWidth, winHeight;
     int width = 20, height = 20;
 
     MineSweeper ms(width, height);
@@ -228,8 +229,6 @@ public:
     time_t now = time(NULL);
 
     while (!quit) {
-      erase();
-
       if (state != SAFE && !gameEnded) {
         time_t diff = time(NULL) - now;
         now += diff;
@@ -245,10 +244,14 @@ public:
         gameEnded = true;
       }
 
+      erase();
+
       attron(COLOR_PAIR(DEFAULT_PAIR));
       mvprintw(0, 0, status.c_str());
 
-      printBoard(ms, cursor, 0, countLines(status));
+      getmaxyx(stdscr, winHeight, winWidth);
+
+      printBoard(ms, cursor, (winWidth) / 2 - width, countLines(status));
 
       refresh();
 
