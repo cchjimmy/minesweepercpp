@@ -64,22 +64,11 @@ void buildStatusString(MineSweeper &ms, std::string &str) {
       "Keys: r - new game, c - configure,\n      f - flag cell, space - reveal "
       "cell\n      q - quit\n");
   str.append("Movement: w/a/s/d, h/j/k/l, arrow keys\n");
-  str.append("Seed: ");
-  str.append(std::to_string(ms.getSeed()));
-  str.append(", ");
-  str.append("Size: ");
-  str.append(std::to_string(ms.getWidth()) + "x" +
-             std::to_string(ms.getHeight()));
-  str.append(", ");
-  str.append("Flag count: ");
-  str.append(std::to_string(ms.getNumFlags()));
-  str.append("\n");
-  str.append("# Mines: ");
-  str.append(std::to_string(ms.getNumMines()));
-  str.append(", ");
-  str.append("Percentage mines: ");
-  str.append(std::to_string(ms.getDensity()));
-  str.append("\n");
+  // str.append(std::format("Seed: {}, ", ms.getSeed()));
+  str.append(std::format("Size: {}x{}, ", ms.getWidth(), ms.getHeight()));
+  str.append(std::format("Flag count: {}\n", ms.getNumFlags()));
+  str.append(std::format("# Mines: {}, ", ms.getNumMines()));
+  str.append(std::format("Percentage mines: {:.2f}\n", ms.getDensity()));
 }
 
 int countLines(std::string s) {
